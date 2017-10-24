@@ -1,15 +1,16 @@
 import React from 'react';
 import VideoItem from './VideoItem'
+import './VideoList.css'
 
 const VideoList = function (props) {
 
     const videoItems = props.videos
     .map(v => 
-      <VideoItem key={v.id.videoId} videoId={v.id.videoId} title={v.snippet.title} />
+      <VideoItem key={v.id.videoId} videoId={v.id.videoId} title={v.snippet.title} thumbnail={v.snippet.thumbnails.medium.url}/>
     );
 
     return (
-        <div>{videoItems}</div>
+        <div className="video-list">{videoItems}</div>
     );
 }
 

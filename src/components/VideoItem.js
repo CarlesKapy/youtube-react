@@ -1,16 +1,12 @@
 import React from 'react';
+import './VideoItem.css';
 
 const VideoItem = function (props) {
     
     return (
-        <div>
-            <h1>{props.title}</h1>
-            <iframe 
-                title={props.title}
-                width="560" height="315"
-                src={ "https://www.youtube.com/embed/" + props.videoId }
-                frameBorder="0" allowFullScreen>
-            </iframe>
+        <div class="video-item">
+            <h3>{props.title}</h3>
+            <img src={props.thumbnail} alt={props.title}/>
         </div>
     );
 }
