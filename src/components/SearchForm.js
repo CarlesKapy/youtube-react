@@ -17,17 +17,19 @@ class SearchForm extends Component{
 
     render() {
         return (
-            <div>
+            <form onSubmit={
+                (event) => {
+                    event.preventDefault()
+                    this.search(this.state.inputValue)
+                }}
+            >
                 <input 
                     value={this.state.inputValue} 
                     onChange={(event) => this.setState({inputValue: event.target.value})}
                     />
 
-                <button 
-                    onClick={() => {this.search(this.state.inputValue)}}>
-                    Search
-                </button>
-            </div>
+                <button>Search</button>
+            </form>
         )
     }
 
