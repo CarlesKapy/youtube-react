@@ -4,9 +4,17 @@ import './VideoList.css'
 
 const VideoList = function (props) {
 
-    const videoItems = props.videos
+    const videos = props.videos.map(v => {
+        return {
+            id: v.id.videoId,
+            title: v.snippet.title,
+            thumbnail: v.snippet.thumbnails.medium.url
+        };
+    })
+
+    const videoItems = videos
     .map(v => 
-      <VideoItem key={v.id.videoId} videoId={v.id.videoId} title={v.snippet.title} thumbnail={v.snippet.thumbnails.medium.url}/>
+      <VideoItem key={v.id} video={v}/>
     );
 
     return (
