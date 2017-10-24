@@ -20,7 +20,14 @@ class App extends Component {
       .then(response => {
         const videos = response.data.items.filter(v => 
           v.id.kind === "youtube#video"
-        );
+        )
+        .map(v => {
+          return {
+              id: v.id.videoId,
+              title: v.snippet.title,
+              thumbnail: v.snippet.thumbnails.medium.url
+          };
+        });
 
         this.setState({videos: videos});
         }

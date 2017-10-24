@@ -2,12 +2,7 @@
 
 import React from 'react';
 import './VideoItem.css';
-
-type Video = {
-    id: string,
-    title: string,
-    thumbnail: string,
-};
+import Video from './types'
 
 type Props = {
     video: Video
