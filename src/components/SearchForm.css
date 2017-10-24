@@ -1,0 +1,9 @@
+.search-form{
+    display: flex;
+    flex-direction: row;
+}
+
+button {
+    height: 100%;
+    padding: 5px;
+}

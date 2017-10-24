@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './SearchForm.css';
 
 class SearchForm extends Component{
 
@@ -17,13 +18,14 @@ class SearchForm extends Component{
 
     render() {
         return (
-            <form onSubmit={
+            <form className="search-form" onSubmit={
                 (event) => {
                     event.preventDefault()
                     this.search(this.state.inputValue)
                 }}
             >
                 <input 
+                    type="text"
                     placeholder={this.props.placeholder}
                     value={this.state.inputValue} 
                     onChange={(event) => this.setState({inputValue: event.target.value})}
