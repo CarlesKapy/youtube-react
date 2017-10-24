@@ -1,7 +1,19 @@
+// @flow
+
 import React from 'react';
 import './VideoItem.css';
 
-const VideoItem = function (props) {
+type Video = {
+    id: string,
+    title: string,
+    thumbnail: string,
+};
+
+type Props = {
+    video: Video
+};
+
+const VideoItem = function (props: Props) {
     
     return (
         <div className="video-item">
