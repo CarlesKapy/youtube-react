@@ -24,11 +24,12 @@ class SearchForm extends Component{
                 }}
             >
                 <input 
+                    placeholder={this.props.placeholder}
                     value={this.state.inputValue} 
                     onChange={(event) => this.setState({inputValue: event.target.value})}
                     />
 
-                <button>Search</button>
+                <button>{this.props.buttonTitle}</button>
             </form>
         )
     }

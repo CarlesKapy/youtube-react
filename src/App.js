@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import VideoList from './components/VideoList'
-import SearchForm from './components/SearchForm'
+import MenuBar from './components/MenuBar'
 import axios from 'axios'
 
 class App extends Component {
@@ -31,7 +31,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <SearchForm onSearch={(query) => {this.search(query)}}/>
+        <MenuBar onSearch={(query) => {this.search(query)}}/>
         <VideoList videos={this.state.videos}/>
       </div>
     );
