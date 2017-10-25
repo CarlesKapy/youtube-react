@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
-import VideoList from './components/VideoList'
-import MenuBar from './components/MenuBar'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import type { ContextRouter } from 'react-router-dom'
 import axios from 'axios'
+import VideoList from './components/VideoList'
+import VideoPlayer from './components/VideoPlayer'
+import MenuBar from './components/MenuBar'
+import MyYoutubeApiKey from './youtube-api-key.json'
 
 class App extends Component {
 
@@ -9,12 +13,13 @@ class App extends Component {
     super(props);
 
     this.state = {
-      videos: []
+      videos: [],
+      loading: false
     };
   }
 
   search (query) {
-    const url = "https://www.googleapis.com/youtube/v3/search?maxResults=10&part=snippet&q=" + query + "&key=YOUTUBE_API_KEY"
+    const url = "https://www.googleapis.com/youtube/v3/search?maxResults=10&part=snippet&q=" + query + "&key="+MyYoutubeApiKey.api_key
   
     axios.get(url)
       .then(response => {
@@ -28,18 +33,39 @@ class App extends Component {
               thumbnail: v.snippet.thumbnails.medium.url
           };
         });
-
-        this.setState({videos: videos});
+        
+        this.setState({videos: videos, loading: false});
         }
       )
       .catch(error => console.error(error))  
+
+      this.setState({ loading: true });
   }
 
   render() {
     return (
       <div>
-        <MenuBar onSearch={(query) => {this.search(query)}}/>
-        <VideoList videos={this.state.videos}/>
+        <BrowserRouter>
+        <div>
+          <Route render={ (context: ContextRouter) =>
+            <MenuBar onSearch={(value: string) => {
+              this.search(value)
+              context.history.push('/')
+            }} />
+          } />
+          <Switch>
+            <Route exact path='/'
+            render={() => {
+                   if (this.state.loading) {
+                     return <div>Loading...</div>
+                   } else {
+                     return <VideoList videos={this.state.videos}/>
+                   }                  
+                 }} />
+            <Route exact path='/detail/:id' component={VideoPlayer} />
+          </Switch>
+        </div>
+        </BrowserRouter>
       </div>
     );
   }

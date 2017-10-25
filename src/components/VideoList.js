@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { Link } from 'react-router-dom'
 import VideoItem from './VideoItem'
 import './VideoList.css'
 import Video from './types'
@@ -12,7 +13,9 @@ const VideoList = function (props: Props) {
 
     const videoItems = props.videos
     .map(v => 
-      <VideoItem key={v.id} video={v}/>
+        <Link key={v.id} to={"/detail/" + v.id}>
+            <VideoItem video={v} />
+        </Link>
     );
 
     return (
