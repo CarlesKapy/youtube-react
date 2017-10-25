@@ -2,9 +2,13 @@ import React, {Component} from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import type { ContextRouter } from 'react-router-dom'
 import axios from 'axios'
+
 import VideoList from './components/VideoList'
 import VideoPlayer from './components/VideoPlayer'
 import MenuBar from './components/MenuBar'
+
+import YoutubeUtil from './YoutubeUtil'
+
 import MyYoutubeApiKey from './youtube-api-key.json'
 
 class App extends Component {
@@ -23,17 +27,7 @@ class App extends Component {
   
     axios.get(url)
       .then(response => {
-        const videos = response.data.items.filter(v => 
-          v.id.kind === "youtube#video"
-        )
-        .map(v => {
-          return {
-              id: v.id.videoId,
-              title: v.snippet.title,
-              thumbnail: v.snippet.thumbnails.medium.url
-          };
-        });
-        
+        const videos = YoutubeUtil.extractVideos(response.data);
         this.setState({videos: videos, loading: false});
         }
       )
