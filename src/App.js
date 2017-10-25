@@ -7,7 +7,7 @@ import VideoList from './components/VideoList'
 import VideoPlayer from './components/VideoPlayer'
 import MenuBar from './components/MenuBar'
 
-import YoutubeUtil from './YoutubeUtil'
+import YoutubeUtil from './utils/YoutubeUtil'
 
 import MyYoutubeApiKey from './youtube-api-key.json'
 
